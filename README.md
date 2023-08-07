@@ -1,24 +1,35 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
+This application was tested on macOS Venture 13.5.
 
-* Ruby version
+Ruby 3.2.2 was provided via `rbenv`.
 
-* System dependencies
+This application assumes you have installed PostgreSQL 14 via Homebrew:
 
-* Configuration
+```
+brew install postgresql@14
+brew link postgresql@14
+```
 
-* Database creation
+This application requires a PostgreSQL database server. You can use a Docker container or Homebrew to provide one.
 
-* Database initialization
+Docker:
 
-* How to run the test suite
+```
+docker run -it -p 5432:5432 -e POSTGRES_PASSWORD=password postgres:14.5
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Homebrew:
 
-* Deployment instructions
+```
+/opt/homebrew/opt/postgresql@14/bin/postgres -D /opt/homebrew/var/postgresql@14
+```
 
-* ...
+This application assumes your Postgres server is running on `localhost:5432` with a username of `postgres` and a password of `password`. 
+If that is not the case, set the `DATABASE_URL` environment variable with an appropriate connection string.
+
+## Running Tests
+
+Run `spring stop` to ensure Spring has stopped. Then run `rake test` to induce failure.
